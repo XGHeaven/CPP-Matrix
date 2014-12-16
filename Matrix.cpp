@@ -35,6 +35,22 @@ Matrix & Matrix :: put (int x){
 	return *this;
 }
 
+Matrix & Matrix :: setposi(int i){
+	I = i;
+	return *this;
+}
+
+Matrix & Matrix::reset(int x, int y, int v){
+	c[x][y] = v;
+	return *this;
+}
+
+Matrix & Matrix::clear(int v){
+	for (int i=0;i<n;i++)
+		for (int j=0;j<m;j++)
+			c[i][j] = v;
+}
+
 void Matrix :: print (const char * space, const char * endl) const {
 	for (int i=0;i<n;i++){
 		for (int j=0;j<m-1;j++) std::cout<<c[i][j]<<space;
