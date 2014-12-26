@@ -8,7 +8,7 @@
 
 
 
-文件结构  
+# 文档结构  
 
 > * Matrix.hpp 矩阵类的声明
 
@@ -16,7 +16,7 @@
 
 
 
-	如何使用Matrix类呢？
+# 如何使用Matrix类呢？
 
 ```
 #include "Matrix.hpp"
