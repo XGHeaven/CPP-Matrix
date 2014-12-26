@@ -8,8 +8,12 @@
 
 文件结构  
 
-* Matrix.hpp 矩阵类的声明
+> * Matrix.hpp 矩阵类的声明
 
-* Matrix.cpp 矩阵类的定义
+> * Matrix.cpp 矩阵类的定义
+
+* 如何使用Matrix类呢？
+
+	#include "Matrix.hpp"
 
 希望大家继续关注，我将不停的进行更新。

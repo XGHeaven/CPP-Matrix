@@ -28,20 +28,34 @@ Matrix :: ~Matrix(){
 	delete c;
 }
 
-Matrix & Matrix :: put (int x){
-	if (I>n*m) return *this;
-	c[I/m][I%m] = x;
+Matrix & Matrix :: put (int v){
+	if (I>=n*m){
+		std::cerr<<"This Matrix is full ,value = "<<v<<std::endl;
+		return *this;
+	}
+	
+	c[I/m][I%m] = v;
 	I++;
+	
+	return *this;
+}
+
+Matrix & Matrix :: put(int * number, int length){
+	for (int i=0;i<length;i++) this->put(number[i]);
 	return *this;
 }
 
 Matrix & Matrix :: setposi(int i){
 	I = i;
+	
 	return *this;
 }
 
-Matrix & Matrix::reset(int x, int y, int v){
+Matrix & Matrix::set(int x, int y, int v){
+	if (x<0 || x>n-1 || y<0 || y>n-1) return *this;
+	
 	c[x][y] = v;
+	
 	return *this;
 }
 
@@ -49,6 +63,7 @@ Matrix & Matrix::clear(int v){
 	for (int i=0;i<n;i++)
 		for (int j=0;j<m;j++)
 			c[i][j] = v;
+	I = J = 0;
 }
 
 void Matrix :: print (const char * space, const char * endl) const {
@@ -59,9 +74,13 @@ void Matrix :: print (const char * space, const char * endl) const {
 }
 
 Matrix & Matrix :: operator *= (Matrix & Ma){
+	if (m != Ma.n){
+		std::cerr<<"Matrix can't mul"<<std::endl;
+		return *this;
+	}
 	int ** temp;
-	int N = Ma.gn();
-	int M = Ma.gm();
+	int N = Ma.n;
+	int M = Ma.m;
 	temp = new int * [n];
 	for (int i=0;i<m;i++) temp[i] = new int [M];
 	for (int i=0;i<n;i++)
@@ -78,12 +97,34 @@ Matrix & Matrix :: operator *= (Matrix & Ma){
 }
 
 Matrix Matrix :: operator * (Matrix & Ma){
-	int N = Ma.gn();
-	int M = Ma.gm();
+	if (m != Ma.n){
+		std::cerr<<"Matrix can't mul"<<std::endl;
+		return *this;
+	}
+	
+	int N = Ma.n;
+	int M = Ma.m;
 	Matrix temp(n,M);
 	for (int i=0;i<n;i++)
 		for (int j=0;j<M;j++)
 			for (int k=0;k<m;k++)
 				temp.get(i,j)+=c[i][k]*Ma.get(k,j);
 	return temp;
+}
+
+Matrix & Matrix :: operator = (Matrix & Ma){
+	if (n!=Ma.n || m!=Ma.m){
+		std::cerr<<"Matrix's row or line is different"<<std::endl;
+		return *this;
+	}
+	for (int i=0;i<n;i++)
+		for (int j=0;j<m;j++)
+			c[i][j]=Ma.c[i][j];
+	return *this;
+} 
+
+int Matrix :: next () {
+	J++;
+	if (J>=n*m) J = n*m;
+	return c[(J-1)/m][(J-1)%m];
 }
