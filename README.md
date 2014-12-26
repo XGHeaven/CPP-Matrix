@@ -14,6 +14,8 @@
 
 * 如何使用Matrix类呢？
 
-	#include "Matrix.hpp"
+```
+#include "Matrix.hpp"
+```
 
 希望大家继续关注，我将不停的进行更新。
